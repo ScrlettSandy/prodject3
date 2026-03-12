@@ -1,23 +1,437 @@
 <!DOCTYPE html>
-<style>
-  /* netnet default bg */
-  body {
-    margin: 0;
-    background-image: linear-gradient(#515199a8 2px, transparent 1px),
-      linear-gradient(90deg, #515199a8 2px, transparent 1px);
-    background-size: 50px 50px;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-  }
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Princes Gate | Scarlett Sandy</title>
+  <style>
+    :root {
+      --deep-red: #3d090c;
+      --wine: #280506;
+      --soft-rose: #d3aaaa;
+      --cream: #f8f2ec;
+      --text-dark: #3c1616;
+      --white: #ffffff;
+      --charcoal: #171313;
+      --mist: #d9d4d0;
+    }
 
-  body::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(0deg, #c76ebca8, #515199a8);
-  }
-</style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(rgba(61, 9, 12, 0.78), rgba(61, 9, 12, 0.78)), url("roses.jpg") center/cover fixed;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, .display-font {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 1px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    .page {
+      width: min(1200px, 94vw);
+      margin: 0 auto;
+      padding: 18px 0 28px;
+    }
+
+    .panel {
+      background: var(--cream);
+      border: 10px solid rgba(211, 170, 170, 0.9);
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .top-link {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--white);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      min-height: 72vh;
+      position: relative;
+      background: linear-gradient(rgba(20, 0, 0, 0.38), rgba(20, 0, 0, 0.54)), url("8.png") center center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 34px;
+      color: var(--white);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(20, 0, 0, 0.58), rgba(20, 0, 0, 0.08));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(61, 9, 12, 0.88);
+      color: var(--white);
+      padding: 8px 14px;
+      margin-bottom: 16px;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: rgba(255, 244, 240, 0.95);
+      text-shadow: 0 2px 18px rgba(0,0,0,0.24);
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 1.05rem;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .section {
+      padding: 28px;
+    }
+
+    .section-title {
+      color: var(--deep-red);
+      font-size: clamp(1.8rem, 3vw, 3.1rem);
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 16px;
+    }
+
+    .summary p,
+    .reflection p,
+    .video-note p {
+      margin-bottom: 12px;
+      font-size: 0.98rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .meta-card {
+      background: var(--white);
+      border: 2px solid #ecd8d6;
+      padding: 14px;
+    }
+
+    .meta-card h3 {
+      color: var(--deep-red);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .meta-card p {
+      font-size: 0.97rem;
+    }
+
+    .video-wrap {
+      background: var(--charcoal);
+      padding: 0;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .caption {
+      padding: 14px 20px 18px;
+      font-size: 0.92rem;
+      color: var(--wine);
+      background: var(--cream);
+      border-top: 1px solid #e3d0cf;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .process-card {
+      background: var(--white);
+      border: 2px solid #ecd8d6;
+      padding: 20px;
+    }
+
+    .process-number {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      color: var(--deep-red);
+      margin-bottom: 8px;
+    }
+
+    .process-card h3 {
+      color: var(--deep-red);
+      text-transform: uppercase;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .still-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .still-card {
+      background: var(--white);
+      border: 2px solid #ecd8d6;
+      overflow: hidden;
+    }
+
+    .still-card img {
+      min-height: 320px;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .still-copy {
+      padding: 16px;
+      font-size: 0.95rem;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .result-pill {
+      background: var(--deep-red);
+      color: var(--white);
+      padding: 16px 14px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.92rem;
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .nav-button {
+      background: var(--deep-red);
+      color: var(--white);
+      padding: 12px 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .overview,
+      .process-grid,
+      .still-grid,
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 58vh;
+        background-position: center center;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 10vw, 4rem);
+      }
+
+      .nav-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="top-link" href="index.html">← Back to Home</a>
+
+    <section class="panel hero">
+      <div class="hero-content">
+        <span class="eyebrow">Project Three</span>
+        <h1 class="display-font">The Princes Gate</h1>
+        <p>
+          A silent short film centered on atmosphere, place, and observation, using visuals alone to capture the feeling of the Princess Cafe and the surrounding winter streetscape.
+        </p>
+      </div>
+    </section>
+
+    <section class="overview">
+      <div class="panel section summary">
+        <h2 class="section-title display-font">About the Project</h2>
+        <p>
+          The Princes Gate is a silent short film I created around the Princess Cafe. Instead of relying on dialogue or sound, I focused on visual atmosphere to communicate the feeling of the space.
+        </p>
+        <p>
+          The project explores how mood can be built through framing, pacing, movement, and environment. Snow, distance, stillness, signage, and everyday street details all become part of the storytelling.
+        </p>
+        <p>
+          I wanted the film to feel quiet, reflective, and cinematic. This project reflects my interest in visual storytelling and in how emotion can be created through image alone.
+        </p>
+      </div>
+
+      <div class="panel section">
+        <h2 class="section-title display-font">Project Details</h2>
+        <div class="meta-grid">
+          <div class="meta-card">
+            <h3>Type</h3>
+            <p>Silent short film / visual storytelling project</p>
+          </div>
+          <div class="meta-card">
+            <h3>My Role</h3>
+            <p>Concept, filming, shot selection, editing, and title design</p>
+          </div>
+          <div class="meta-card">
+            <h3>Focus</h3>
+            <p>Atmosphere, pacing, composition, and communicating mood without sound</p>
+          </div>
+          <div class="meta-card">
+            <h3>Goal</h3>
+            <p>Create a quiet, immersive film experience built entirely through visuals</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel video-wrap">
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/m2VYh0xjlBI"
+          title="The Princes Gate"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="caption">Embedded video player for the final short film. If your platform blocks YouTube embeds, you can replace this with a clickable video link instead.</div>
+    </section>
+
     
+
+    <section class="panel section">
+      <h2 class="section-title display-font">Design + Film Process</h2>
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-number">01</div>
+          <h3>Concept</h3>
+          <p>
+            I wanted to build a short film around atmosphere rather than dialogue. The idea was to let the location speak through visuals and to capture the quiet feeling of the Princess Cafe area in winter.
+          </p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">02</div>
+          <h3>Filming</h3>
+          <p>
+            I focused on observational shots, movement through space, and small environmental details. The visual approach was meant to feel calm, reflective, and slightly distant.
+          </p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">03</div>
+          <h3>Editing</h3>
+          <p>
+            Because the film is silent, pacing became especially important. I used the sequence of images to guide the viewer through mood and place without needing spoken explanation.
+          </p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">04</div>
+          <h3>Outcome</h3>
+          <p>
+            The final result is a short film that communicates atmosphere through framing and visual rhythm. It shows my ability to tell a story using restraint, tone, and image-based storytelling.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="still-grid">
+      <div class="panel still-card">
+        <img src="8.png" alt="The Princes Gate film cover image">
+        <div class="still-copy">
+          Cover image used to introduce the film and establish its quiet winter atmosphere.
+        </div>
+      </div>
+      <div class="panel section reflection">
+        <h2 class="section-title display-font">Reflection</h2>
+        <p>
+          This project pushed me to think carefully about how visuals alone can hold attention and create emotion. Without sound, every frame had to contribute to the mood.
+        </p>
+        <p>
+          I enjoyed working with silence as a creative choice rather than a limitation. It made me pay closer attention to composition, stillness, and what makes a place feel cinematic.
+        </p>
+        <p>
+          The Princes Gate reflects my interest in film, atmosphere, and storytelling through subtle visual details.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <h2 class="section-title display-font">What This Project Shows</h2>
+      <div class="results">
+        <div class="result-pill">Visual Storytelling</div>
+        <div class="result-pill">Cinematography</div>
+        <div class="result-pill">Editing</div>
+        <div class="result-pill">Atmosphere</div>
+        <div class="result-pill">Concept Development</div>
+        <div class="result-pill">Creative Direction</div>
+      </div>
+      <div class="nav-row">
+        <a class="nav-button" href="project2.html">Previous Project</a>
+        <a class="nav-button" href="index.html">Back to Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
