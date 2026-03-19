@@ -4,432 +4,674 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Princess Cafe | Scarlett Sandy</title>
+
   <style>
-    :root {
-      --deep-red: #3d090c;
-      --wine: #280506;
-      --soft-rose: #d3aaaa;
-      --cream: #f8f2ec;
-      --text-dark: #3c1616;
-      --white: #ffffff;
-      --charcoal: #171313;
-      --mist: #d9d4d0;
+    :root{
+      --bg:#120203;
+      --cherry:#5d0d12;
+      --cherry-dark:#2a0508;
+      --wine:#3b080c;
+      --wine-soft:#6d1820;
+      --rose:#e8d7d1;
+      --soft:#f6ece7;
+      --card:rgba(255,255,255,0.06);
+      --card-strong:rgba(255,255,255,0.08);
+      --text:#fff8f5;
+      --muted:#d8c3bc;
+      --line:rgba(255,255,255,0.12);
+      --shadow:0 20px 60px rgba(0,0,0,0.35);
+      --radius:28px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    body {
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(rgba(61, 9, 12, 0.78), rgba(61, 9, 12, 0.78)), url("roses.jpg") center/cover fixed;
-      color: var(--text-dark);
-      line-height: 1.6;
+      background:
+        radial-gradient(circle at top left, rgba(138,18,30,0.42), transparent 35%),
+        radial-gradient(circle at top right, rgba(118,15,24,0.22), transparent 30%),
+        linear-gradient(180deg, #4a0a10 0%, #220407 42%, #120203 100%);
+      color:var(--text);
+      overflow-x:hidden;
     }
 
-    h1, h2, h3, .display-font {
+    img{
+      display:block;
+      max-width:100%;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .display{
       font-family: Georgia, "Times New Roman", serif;
-      letter-spacing: 1px;
+      letter-spacing:0.04em;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .page{
+      width:min(1180px, 92vw);
+      margin:0 auto;
+      padding:28px 0 70px;
     }
 
-    img {
-      width: 100%;
-      display: block;
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:24px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
     }
 
-    .page {
-      width: min(1200px, 94vw);
-      margin: 0 auto;
-      padding: 18px 0 28px;
+    .nav-group{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:center;
     }
 
-    .panel {
-      background: var(--cream);
-      border: 10px solid rgba(211, 170, 170, 0.9);
-      margin-bottom: 18px;
-      overflow: hidden;
+    .brand{
+      font-size:0.95rem;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      font-weight:700;
+      color:var(--text);
     }
 
-    .top-link {
-      display: inline-block;
-      margin-bottom: 14px;
-      color: var(--white);
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .nav-group a{
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      padding-bottom:4px;
+      border-bottom:1px solid rgba(255,255,255,0.2);
+      transition:0.25s ease;
+      color:var(--text);
     }
 
-    .hero {
-      min-height: 72vh;
-      position: relative;
-      background: linear-gradient(rgba(20, 0, 0, 0.38), rgba(20, 0, 0, 0.54)), url("8.png") center center/cover;
-      display: flex;
-      align-items: flex-end;
-      padding: 34px;
-      color: var(--white);
+    .nav-group a:hover{
+      border-color:rgba(255,255,255,0.55);
+      transform:translateY(-1px);
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(20, 0, 0, 0.58), rgba(20, 0, 0, 0.08));
-      z-index: 1;
+    .hero{
+      min-height:84vh;
+      display:grid;
+      grid-template-columns:1.02fr 0.98fr;
+      gap:30px;
+      align-items:center;
+      margin-bottom:34px;
+      position:relative;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 760px;
+    .hero-copy{
+      position:relative;
+      z-index:2;
     }
 
-    .eyebrow {
-      display: inline-block;
-      background: rgba(61, 9, 12, 0.88);
-      color: var(--white);
-      padding: 8px 14px;
-      margin-bottom: 16px;
-      font-size: 0.86rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+    .eyebrow{
+      font-size:0.84rem;
+      letter-spacing:0.24em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:14px;
+      font-weight:700;
     }
 
-    .hero h1 {
-      font-size: clamp(3rem, 7vw, 6rem);
-      line-height: 0.9;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      color: rgba(255, 244, 240, 0.95);
-      text-shadow: 0 2px 18px rgba(0,0,0,0.24);
+    .hero h1{
+      font-size:clamp(3rem, 7vw, 6rem);
+      line-height:0.93;
+      margin-bottom:18px;
+      color:var(--text);
+      text-transform:uppercase;
     }
 
-    .hero p {
-      max-width: 650px;
-      font-size: 1.05rem;
+    .hero p{
+      max-width:620px;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:1rem;
+      margin-bottom:0;
     }
 
-    .overview {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
+    .hero-visual{
+      position:relative;
+      min-height:620px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .section {
-      padding: 28px;
+    .hero-panel{
+      position:absolute;
+      inset:16px 0 16px 34px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:42px;
+      z-index:1;
+      box-shadow:var(--shadow);
     }
 
-    .section-title {
-      color: var(--deep-red);
-      font-size: clamp(1.8rem, 3vw, 3.1rem);
-      text-transform: uppercase;
-      line-height: 0.95;
-      margin-bottom: 16px;
+    .film-single{
+      position:relative;
+      z-index:2;
+      width:min(440px, 100%);
+      display:grid;
+      place-items:center;
     }
 
-    .summary p,
-    .reflection p,
-    .video-note p {
-      margin-bottom: 12px;
-      font-size: 0.98rem;
+    .film-main{
+      width:78%;
+      border-radius:22px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.28);
+      object-fit:cover;
     }
 
-    .meta-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
+    .section{
+      margin-top:30px;
+      margin-bottom:34px;
+      scroll-margin-top:40px;
     }
 
-    .meta-card {
-      background: var(--white);
-      border: 2px solid #ecd8d6;
-      padding: 14px;
+    .section-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:var(--radius);
+      padding:34px;
+      box-shadow:var(--shadow);
     }
 
-    .meta-card h3 {
-      color: var(--deep-red);
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
+    .section-title{
+      font-size:clamp(2rem, 5vw, 3.5rem);
+      margin-bottom:18px;
+      line-height:0.95;
+      text-transform:uppercase;
+      color:var(--text);
     }
 
-    .meta-card p {
-      font-size: 0.97rem;
+    .section-text{
+      color:var(--muted);
+      line-height:1.9;
+      font-size:1rem;
+      max-width:920px;
     }
 
-    .video-wrap {
-      background: var(--charcoal);
-      padding: 0;
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
     }
 
-    .video-frame {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      background: #000;
+    .mini-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow);
     }
 
-    .video-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+    .mini-card h3{
+      font-size:1.18rem;
+      margin-bottom:10px;
+      color:var(--text);
+      text-transform:uppercase;
+      letter-spacing:0.03em;
     }
 
-    .caption {
-      padding: 14px 20px 18px;
-      font-size: 0.92rem;
-      color: var(--wine);
-      background: var(--cream);
-      border-top: 1px solid #e3d0cf;
+    .mini-card p,
+    .mini-card li{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:0.98rem;
     }
 
-    .process-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
+    .mini-card ul{
+      padding-left:18px;
+      margin-top:8px;
     }
 
-    .process-card {
-      background: var(--white);
-      border: 2px solid #ecd8d6;
-      padding: 20px;
+    .process-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:18px;
+      margin-top:24px;
     }
 
-    .process-number {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 2rem;
-      color: var(--deep-red);
-      margin-bottom: 8px;
+    .process-step{
+      background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border-radius:24px;
+      padding:22px 20px;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:var(--shadow);
     }
 
-    .process-card h3 {
-      color: var(--deep-red);
-      text-transform: uppercase;
-      font-size: 1rem;
-      margin-bottom: 8px;
+    .step-number{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:linear-gradient(180deg, var(--wine-soft), var(--cherry));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      margin-bottom:14px;
+      box-shadow:var(--shadow);
     }
 
-    .still-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
+    .process-step h4{
+      font-size:1.02rem;
+      margin-bottom:10px;
+      color:var(--text);
+      text-transform:uppercase;
+      letter-spacing:0.03em;
     }
 
-    .still-card {
-      background: var(--white);
-      border: 2px solid #ecd8d6;
-      overflow: hidden;
+    .process-step p{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:0.95rem;
     }
 
-    .still-card img {
-      min-height: 320px;
-      object-fit: cover;
-      object-position: center center;
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:20px;
+      margin-top:22px;
     }
 
-    .still-copy {
-      padding: 16px;
-      font-size: 0.95rem;
+    .feature-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border-radius:24px;
+      padding:24px;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:var(--shadow);
     }
 
-    .results {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 16px;
+    .feature-card h4{
+      font-size:1.05rem;
+      margin-bottom:8px;
+      color:var(--rose);
+      text-transform:uppercase;
+      letter-spacing:0.03em;
     }
 
-    .result-pill {
-      background: var(--deep-red);
-      color: var(--white);
-      padding: 16px 14px;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.92rem;
+    .feature-card p{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:0.95rem;
     }
 
-    .nav-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      margin-top: 18px;
+    .video-frame{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      background:#000;
+      border-radius:24px;
+      overflow:hidden;
+      margin-top:22px;
+      box-shadow:var(--shadow);
     }
 
-    .nav-button {
-      background: var(--deep-red);
-      color: var(--white);
-      padding: 12px 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.9rem;
+    .video-frame iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
     }
 
-    @media (max-width: 900px) {
-      .overview,
-      .process-grid,
-      .still-grid,
-      .results {
-        grid-template-columns: 1fr;
+    .video-note{
+      margin-top:16px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:0.96rem;
+    }
+
+    .gallery-single{
+      margin-top:24px;
+      max-width:760px;
+    }
+
+    .gallery-item{
+      background:rgba(255,255,255,0.06);
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:var(--shadow);
+    }
+
+    .gallery-item img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:cover;
+    }
+
+    .gallery-caption{
+      padding:16px 18px 20px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:0.95rem;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    }
+
+    .reflection{
+      background:linear-gradient(135deg, rgba(109,24,32,0.26), rgba(255,255,255,0.04));
+    }
+
+    .footer-note{
+      text-align:center;
+      margin-top:26px;
+      color:rgba(255,255,255,0.6);
+      font-size:0.9rem;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+    }
+
+    @media (max-width: 1000px){
+      .hero,
+      .two-col,
+      .feature-grid,
+      .process-grid{
+        grid-template-columns:1fr;
       }
 
-      .hero {
-        min-height: 58vh;
-        background-position: center center;
+      .hero{
+        min-height:auto;
       }
 
-      .hero h1 {
-        font-size: clamp(2.4rem, 10vw, 4rem);
+      .hero-visual{
+        min-height:520px;
       }
 
-      .nav-row {
-        flex-direction: column;
+      .film-main{
+        width:62%;
+      }
+    }
+
+    @media (max-width: 760px){
+      .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
+    @media (max-width: 640px){
+      .page{
+        width:min(94vw, 1000px);
+        padding-top:22px;
+      }
+
+      .section-card,
+      .mini-card{
+        padding:24px;
+      }
+
+      .hero-visual{
+        min-height:420px;
+      }
+
+      .hero-panel{
+        inset:10px 0 10px 0;
+      }
+
+      .film-main{
+        width:76%;
       }
     }
   </style>
 </head>
 <body>
   <main class="page">
-    <a class="top-link" href="https://scrlettsandy.github.io/portflio/" target="_blank">← Back to Home</a>
 
-    <section class="panel hero">
-      <div class="hero-content">
-        <span class="eyebrow">Project Three</span>
-        <h1 class="display-font">The Princess Cafe</h1>
-        <p>
-          A silent short film centered on atmosphere, place, and observation, using visuals alone to capture the feeling of the Princess Cafe and the surrounding winter streetscape.
-        </p>
-      </div>
-    </section>
-
-    <section class="overview">
-      <div class="panel section summary">
-        <h2 class="section-title display-font">About the Project</h2>
-        <p>
-          The Princess Cafe is a silent short film I created around the Princess Cafe. Instead of relying on dialogue or sound, I focused on visual atmosphere to communicate the feeling of the space.
-        </p>
-        <p>
-          The project explores how mood can be built through framing, pacing, movement, and environment. Snow, distance, stillness, signage, and everyday street details all become part of the storytelling.
-        </p>
-        <p>
-          I wanted the film to feel quiet, reflective, and cinematic. This project reflects my interest in visual storytelling and in how emotion can be created through image alone.
-        </p>
+    <header class="topbar">
+      <div class="nav-group">
+        <div class="brand">Scarlett Sandy</div>
+        <a href="https://scrlettsandy.github.io/portflio/">Home</a>
+        <a href="https://scrlettsandy.github.io/prodjectpage/" target="_blank">Projects</a>
       </div>
 
-      <div class="panel section">
-        <h2 class="section-title display-font">Project Details</h2>
-        <div class="meta-grid">
-          <div class="meta-card">
-            <h3>Type</h3>
-            <p>Silent short film / visual storytelling project</p>
-          </div>
-          <div class="meta-card">
-            <h3>My Role</h3>
-            <p>Concept, filming, shot selection, editing, and title design</p>
-          </div>
-          <div class="meta-card">
-            <h3>Focus</h3>
-            <p>Atmosphere, pacing, composition, and communicating mood without sound</p>
-          </div>
-          <div class="meta-card">
-            <h3>Goal</h3>
-            <p>Create a quiet, immersive film experience built entirely through visuals</p>
-          </div>
+      <nav class="nav-group">
+        <a href="#overview">Overview</a>
+        <a href="#process">Process</a>
+        <a href="#gallery">Scenes</a>
+        <a href="#reflection">Reflection</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Film / Visual Storytelling / Editing</div>
+        <h1 class="display">The Princess Cafe</h1>
+        <p>
+          The Princess Cafe is a silent short film centered on atmosphere, place, and observation. I
+          created it to explore how mood can be communicated through visuals alone, using framing,
+          pacing, composition, and environment to tell a story without dialogue or sound.
+        </p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-panel"></div>
+        <div class="film-single">
+          <img src="8.png" alt="The Princess Cafe main visual" class="film-main">
         </div>
       </div>
     </section>
 
-    <section class="panel video-wrap">
-      <div class="video-frame">
-        <iframe
-          src="https://www.youtube.com/embed/m2VYh0xjlBI"
-          title="The Princess Cafe"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
+    <section class="section" id="overview">
+      <div class="section-card">
+        <div class="eyebrow">Project Overview</div>
+        <h2 class="section-title display">A silent short film built through image and atmosphere.</h2>
+        <p class="section-text">
+          For this project, I created a short silent film around the Princess Cafe and the surrounding
+          winter streetscape. Instead of relying on dialogue or sound, I focused on visual storytelling
+          to communicate stillness, mood, and place. I wanted the film to feel quiet, reflective, and
+          cinematic, allowing everyday environmental details like snow, distance, signage, and motion
+          to become part of the narrative.
+        </p>
       </div>
-      <div class="caption">Embedded video player for the final short film. If your platform blocks YouTube embeds, you can replace this with a clickable video link instead.</div>
     </section>
 
-    <section class="panel section">
-      <h2 class="section-title display-font">Design + Film Process</h2>
-      <div class="process-grid">
-        <div class="process-card">
-          <div class="process-number">01</div>
-          <h3>Concept</h3>
+    <section class="section">
+      <div class="two-col">
+        <div class="mini-card">
+          <h3>What I Did</h3>
           <p>
-            I wanted to build a short film around atmosphere rather than dialogue. The idea was to let the location speak through visuals and to capture the quiet feeling of the Princess Cafe area in winter.
+            I developed the concept, filmed the footage, selected the shots, edited the sequence, and
+            shaped the final pacing of the short film. I also thought carefully about the title, visual
+            rhythm, and how to make the film feel immersive without spoken explanation.
           </p>
         </div>
-        <div class="process-card">
-          <div class="process-number">02</div>
-          <h3>Filming</h3>
-          <p>
-            I focused on observational shots, movement through space, and small environmental details. The visual approach was meant to feel calm, reflective, and slightly distant.
-          </p>
-        </div>
-        <div class="process-card">
-          <div class="process-number">03</div>
-          <h3>Editing</h3>
-          <p>
-            Because the film is silent, pacing became especially important. I used the sequence of images to guide the viewer through mood and place without needing spoken explanation.
-          </p>
-        </div>
-        <div class="process-card">
-          <div class="process-number">04</div>
-          <h3>Outcome</h3>
-          <p>
-            The final result is a short film that communicates atmosphere through framing and visual rhythm. It shows my ability to tell a story using restraint, tone, and image-based storytelling.
-          </p>
+
+        <div class="mini-card">
+          <h3>Focus Areas</h3>
+          <ul>
+            <li>Silent visual storytelling</li>
+            <li>Atmosphere and pacing</li>
+            <li>Shot composition and framing</li>
+            <li>Editing through visual rhythm</li>
+            <li>Creating mood through place and observation</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="still-grid">
-      <div class="panel still-card">
-        <img src="8.png" alt="The Princess Cafe film cover image">
-        <div class="still-copy">
-          Cover image used to introduce the film and establish its quiet winter atmosphere.
+    <section class="section" id="process">
+      <div class="section-card">
+        <div class="eyebrow">My Process</div>
+        <h2 class="section-title display">How I shaped the film.</h2>
+        <p class="section-text">
+          I approached this project by thinking about atmosphere first. I wanted the location to speak
+          visually, so I built the film through observation, framing, and editing choices that let the
+          environment hold attention on its own.
+        </p>
+
+        <div class="process-grid">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <h4>Concept</h4>
+            <p>
+              I began with the idea of making a film about mood and place rather than dialogue, using
+              the Princess Cafe as the emotional center of the piece.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <h4>Filming</h4>
+            <p>
+              I focused on observational footage, environmental details, and movement through the space
+              to capture a quiet winter atmosphere.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <h4>Editing</h4>
+            <p>
+              Because the film is silent, editing became especially important. I relied on the order,
+              duration, and pacing of images to guide the experience.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <h4>Outcome</h4>
+            <p>
+              The final result is a short film that communicates tone and place through restraint,
+              atmosphere, and image-based storytelling.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="panel section reflection">
-        <h2 class="section-title display-font">Reflection</h2>
-        <p>
-          This project pushed me to think carefully about how visuals alone can hold attention and create emotion. Without sound, every frame had to contribute to the mood.
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <div class="eyebrow">Project Highlights</div>
+        <h2 class="section-title display">What this project emphasizes.</h2>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Atmosphere</h4>
+            <p>
+              The film is built around creating a quiet, reflective feeling through visual details
+              instead of spoken explanation.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Visual Storytelling</h4>
+            <p>
+              Every frame contributes to the overall tone, showing how image alone can carry emotion
+              and narrative direction.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Cinematography</h4>
+            <p>
+              Framing, movement, and composition were used carefully to make the location feel cinematic
+              and immersive.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Editing</h4>
+            <p>
+              The pacing of the short film helps shape how the viewer experiences the space and mood,
+              especially because the piece is silent.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Observation</h4>
+            <p>
+              Small everyday details become meaningful within the film, helping create a stronger sense
+              of place and stillness.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Creative Direction</h4>
+            <p>
+              The project reflects my interest in cinematic visuals, emotional tone, and storytelling
+              through subtle design and film choices.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="film">
+      <div class="section-card">
+        <div class="eyebrow">Final Film</div>
+        <h2 class="section-title display">Watch the project.</h2>
+
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/m2VYh0xjlBI"
+            title="The Princess Cafe"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="video-note">
+          This embedded video presents the final short film. The project was designed to work without
+          sound, allowing visual pacing, composition, and atmosphere to carry the experience.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-card">
+        <div class="eyebrow">Scene Gallery</div>
+        <h2 class="section-title display">Key visual from the project.</h2>
+
+        <div class="gallery-single">
+          <div class="gallery-item">
+            <img src="8.png" alt="The Princess Cafe cover visual">
+            <div class="gallery-caption">
+              <strong>Cover Frame</strong><br>
+              The main project image establishes the winter tone and introduces the quiet, cinematic
+              atmosphere of the film.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reflection">
+      <div class="section-card reflection">
+        <div class="eyebrow">Reflection</div>
+        <h2 class="section-title display">What I learned from this project.</h2>
+        <p class="section-text">
+          This project pushed me to think carefully about how visuals alone can hold attention and
+          create emotion. Without sound, every frame had to contribute to the mood. It made me more
+          aware of how composition, stillness, and editing pace can shape the feeling of a piece.
         </p>
-        <p>
-          I enjoyed working with silence as a creative choice rather than a limitation. It made me pay closer attention to composition, stillness, and what makes a place feel cinematic.
-        </p>
-        <p>
-          The Princess Cafe reflects my interest in film, atmosphere, and storytelling through subtle visual details.
+        <br>
+        <p class="section-text">
+          I enjoyed working with silence as a creative choice rather than a limitation. It made me pay
+          closer attention to what makes a place feel cinematic and how a viewer can connect to tone
+          through subtle visual details. Overall, The Princess Cafe reflects my interest in film,
+          atmosphere, and storytelling through image-based observation.
         </p>
       </div>
     </section>
 
-    <section class="panel section">
-      <h2 class="section-title display-font">What This Project Shows</h2>
-      <div class="results">
-        <div class="result-pill">Visual Storytelling</div>
-        <div class="result-pill">Cinematography</div>
-        <div class="result-pill">Editing</div>
-        <div class="result-pill">Atmosphere</div>
-        <div class="result-pill">Concept Development</div>
-        <div class="result-pill">Creative Direction</div>
-      </div>
-      <div class="nav-row">
-        <a class="nav-button" href="https://scrlettsandy.github.io/prodject2/" target="_blank">Previous Project</a>
-        <a class="nav-button" href="https://scrlettsandy.github.io/portflio/" target="_blank">Back to Home</a>
-      </div>
-    </section>
+    <div class="footer-note">The Princess Cafe Project Page</div>
   </main>
 </body>
 </html>
